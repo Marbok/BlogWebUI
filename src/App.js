@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import TableOfContents from './TableOfContents';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  constructor() {
+    super();
+    this.state = { topics:[] };
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:8080/getTopics")
+    .then(responce => responce.json())
+    .then(json => this.setState({ topics: json }))
+  }
+
+  render() {
+    return (
+      <TableOfContents topics={ this.state.topics } />
+    )
+  }
 }
 
 export default App;
