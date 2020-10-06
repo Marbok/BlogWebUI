@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import TableOfContents from './pages/TableOfContents/TableOfContents';
 import Main from './pages/Main';
-import Articles from './pages/Articles';
+import Articles from './pages/Articles/Articles';
 
 class App extends React.Component {
 

@@ -11,12 +11,9 @@ function Topics(props) {
                 </li>)
         })
     return (
-        <div>
-            <div>Темы</div>
-            <ul>
-                {index}
-            </ul>
-        </div>)
+        <ul>
+            {index}
+        </ul>)
 }
 
 export default Topics;
