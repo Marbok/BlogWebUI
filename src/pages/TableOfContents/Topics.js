@@ -1,6 +1,6 @@
 import React from 'react';
 
-function TableOfContents(props) {
+function Topics(props) {
     let index = Object.entries(props.topics)
             .map(([key, value]) => <li key={key}>{ value }</li>)
     return (
@@ -12,4 +12,4 @@ function TableOfContents(props) {
     </div>)
 }
 
-export default TableOfContents;
+export default Topics;

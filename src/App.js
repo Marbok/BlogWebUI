@@ -1,5 +1,8 @@
 import React from 'react';
-import TableOfContents from './TableOfContents';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+import TableOfContents from './pages/TableOfContents/TableOfContents';
+import Main from './pages/Main';
 
 class App extends React.Component {
 
@@ -16,7 +19,12 @@ class App extends React.Component {
 
   render() {
     return (
-      <TableOfContents topics={ this.state.topics } />
+      <Router>
+        <Switch>
+          <Route path="/topics" component={ TableOfContents } />
+          <Route path="/" component={ Main } />
+        </Switch>
+      </Router>
     )
   }
 }
