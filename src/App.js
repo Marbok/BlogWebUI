@@ -5,17 +5,14 @@ import TableOfContents from './pages/TableOfContents/TableOfContents';
 import Main from './pages/Main';
 import Articles from './pages/Articles/Articles';
 import Article from './pages/Article/Article';
+import Navigation from './components/Navigation';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
-
-  constructor() {
-    super();
-    this.state = { topics: [] };
-  }
-
   render() {
     return (
       <Router>
+        <Navigation />
         <Switch>
           <Route exact path="/" component={Main} />
           <Route path="/topics" component={TableOfContents} />
