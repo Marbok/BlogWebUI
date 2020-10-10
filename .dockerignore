@@ -1,0 +1,6 @@
+.ionide
+.git
+.gitignore
+build
+node_modules
+README.md
