@@ -1,29 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-import Topics from './Topics'
-import { topicsUrl } from '../../utils/Constant';
+import Topics from './Topics';
 
-class TableOfContents extends React.Component {
-
-  constructor() {
-    super();
-    this.state = { topics: [] };
-  }
-
-  componentDidMount() {
-    fetch(topicsUrl)
-      .then(responce => responce.json())
-      .then(json => this.setState({ topics: json }))
-  }
-
-  render() {
-    return (
-      <div>
-        <div>Темы</div>
-        <Topics topics={this.state.topics} />
-      </div>
-    )
-  }
+function TableOfContents() {
+  return (
+    <div>
+      <div>Темы</div>
+      <Topics />
+    </div>
+  )
 }
 
 export default TableOfContents; 
