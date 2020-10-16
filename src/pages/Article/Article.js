@@ -1,43 +1,31 @@
-import React from 'react'
-import { articleUrl } from '../../utils/Constant'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { getArticle } from '../../redux/actions/getArticleAction'
 
 import Title from './Title'
 import Description from './Description'
 import Content from './Content'
 
-class Article extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            title: "",
-            description: "",
-            content: ""
-        }
-    }
+function Article(props) {
 
-    componentDidMount() {
-        let id = this.props.match.params.idArticle;
-        let url = new URL(articleUrl + '/' + id);
-        fetch(url)
-            .then(result => result.json())
-            .then(json => this.setState({
-                title: json.title,
-                description: json.description,
-                content: json.content
-            }))
-    }
+    useEffect(() => {
+        props.dispatch(getArticle(props.match.params.idArticle))
+    }, [])
 
-    render() {
-        return (
-            <div>
-                <div>Статья</div>
-                <Title title={this.state.title} />
-                <Description description={this.state.description} />
-                <Content content={this.state.content} />
-            </div>
-        );
-    }
+    return (
+        <div>
+            <div>Статья</div>
+            <Title title={props.title} />
+            <Description description={props.description} />
+            <Content content={props.content} />
+        </div>
+    )
 
 }
 
-export default Article;
+function mapStateToProps(state) {
+    const { title, description, content } = state.article;
+    return { title, description, content };
+}
+
+export default connect(mapStateToProps)(Article);
