@@ -11,7 +11,7 @@ function Topics(props) {
 
     let topics = Object.entries(props.topics)
         .map(([key, value]) => {
-            const link = "/articles/" + key;
+            const link = `/articles/${key}`;
             return (
                 <li key={key}>
                     <Link to={link}>{value}</Link>
@@ -21,7 +21,8 @@ function Topics(props) {
     return (
         <ul>
             {topics}
-        </ul>)
+        </ul>
+    )
 }
 
 function mapStateToProps(state) {
