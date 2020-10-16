@@ -10,13 +10,13 @@ function Navigation(props) {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="topics">Topics</Nav.Link>
-                    <Nav.Link href="about">About</Nav.Link>
+                    <Nav.Link href="/topics">Topics</Nav.Link>
+                    <Nav.Link href="/about">About</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
             <Nav className="mr-sm-2">
-                <Nav.Link variant="primary" href="SignIn">SignIn</Nav.Link>
-                <Nav.Link variant="primary" href="SignUp">SignUp</Nav.Link>
+                <Nav.Link variant="primary" href="/SignIn">SignIn</Nav.Link>
+                <Nav.Link variant="primary" href="/SignUp">SignUp</Nav.Link>
             </Nav>
         </Navbar>
     )
