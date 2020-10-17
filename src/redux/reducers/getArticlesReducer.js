@@ -1,6 +1,6 @@
 import { GET_ARTICLES_ACTION } from '../actions/getArticlesAction'
 
-const initialState = { articles: {} }
+const initialState = { articles: [] }
 
 export default function (state = initialState, action) {
     switch (action.type) {

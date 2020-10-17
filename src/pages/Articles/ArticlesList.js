@@ -9,12 +9,12 @@ function ArticleList(props) {
         props.dispatch(getArticles(props.idTopic));
     }, []);
 
-    let articles = Object.entries(props.articles)
-        .map(([key, value]) => {
-            const link = `/article/${key}`;
+    let articles = props.articles
+        .map(({ id, title }) => {
+            const link = `/article/${id}`;
             return (
-                <li key={key}>
-                    <Link to={link}>{value}</Link>
+                <li key={id}>
+                    <Link to={link}>{title}</Link>
                 </li>)
         })
 

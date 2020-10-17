@@ -3,18 +3,18 @@ import { Link } from 'react-router-dom';
 import { getTopicsRequest } from '../../redux/actions/getTopicsAction';
 import { connect } from 'react-redux';
 
-function Topics(props) {
+function TopicsList(props) {
 
     useEffect(() => {
         props.dispatch(getTopicsRequest());
     }, []);
 
-    let topics = Object.entries(props.topics)
-        .map(([key, value]) => {
-            const link = `/articles/${key}`;
+    let topics = props.topics
+        .map(({ id, name }) => {
+            const link = `/articles/${id}`;
             return (
-                <li key={key}>
-                    <Link to={link}>{value}</Link>
+                <li key={id}>
+                    <Link to={link}>{name}</Link>
                 </li>)
         })
 
@@ -30,4 +30,4 @@ function mapStateToProps(state) {
     return { topics };
 }
 
-export default connect(mapStateToProps)(Topics);
+export default connect(mapStateToProps)(TopicsList);
