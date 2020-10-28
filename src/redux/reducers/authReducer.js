@@ -1,11 +1,22 @@
-import { AUTHORIZATION } from '../actions/authAction'
+import { AUTHORIZATION, AUTHORIZATION_ERROR } from '../actions/authAction'
 
-const initialState = { auth: false };
+const initialState = {
+    token: '',
+    error: false
+};
 
 export default function (state = initialState, action) {
     switch (action.type) {
         case AUTHORIZATION:
-            return { auth: true };
+            return {
+                token: action.result,
+                error: false
+            };
+        case AUTHORIZATION_ERROR:
+            return {
+                token: '',
+                error: true
+            }
         default:
             return state;
     }

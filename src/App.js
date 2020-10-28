@@ -9,8 +9,7 @@ import Main from './pages/Main';
 import Articles from './pages/Articles/Articles';
 import Article from './pages/Article/Article';
 import Navigation from './components/Navigation';
-import About from './pages/About'
-import Registration from './pages/Auth/Registration'
+import SignIn from './pages/Auth/SignIn';
 
 class App extends React.Component {
 
@@ -25,8 +24,7 @@ class App extends React.Component {
             <Route path="/topics" component={Topics} />
             <Route path="/articles/:idTopic" component={Articles} />
             <Route path="/article/:idArticle" component={Article} />
-            <Route path="/about" component={About} />
-            <Route path="/SignUp" component={Registration} />
+            <Route path="/SignIn" component={SignIn} />
           </Switch>
         </Router>
       </Provider>
