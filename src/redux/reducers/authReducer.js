@@ -1,8 +1,8 @@
-import { AUTHORIZATION, AUTHORIZATION_ERROR } from '../actions/authAction'
+import { AUTHORIZATION, AUTHORIZATION_ERROR, LOGOUT } from '../actions/authAction'
 
 const initialState = {
     token: '',
-    error: false
+    next: 'START'
 };
 
 export default function (state = initialState, action) {
@@ -10,13 +10,15 @@ export default function (state = initialState, action) {
         case AUTHORIZATION:
             return {
                 token: action.result,
-                error: false
+                next: 'REDIRECT'
             };
         case AUTHORIZATION_ERROR:
             return {
                 token: '',
-                error: true
-            }
+                next: 'ERROR'
+            };
+        case LOGOUT:
+            return initialState;
         default:
             return state;
     }

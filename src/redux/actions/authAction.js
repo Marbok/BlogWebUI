@@ -2,6 +2,7 @@ import { tokenUrl } from '../../utils/Constant';
 
 export const AUTHORIZATION = 'AUTHORIZATION';
 export const AUTHORIZATION_ERROR = 'AUTHORIZATION_ERROR';
+export const LOGOUT = 'LOGOUT';
 
 function authFinish(result) {
     return { type: AUTHORIZATION, result }
@@ -28,4 +29,8 @@ export function auth(login, password) {
             .then(json => dispatch(authFinish(json.token)))
             .catch(() => dispatch(authError()));
     }
+}
+
+export function logout() {
+    return { type: LOGOUT }
 }

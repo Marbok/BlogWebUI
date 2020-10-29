@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { auth } from '../../redux/actions/authAction'
@@ -15,7 +16,11 @@ function SignIn(props) {
         props.dispatch(auth(nickname, password));
     }
 
-    let errorText = props.error ? <div>Authorization Error</div> : <div></div> //todo use another component????
+    let events = {
+        'ERROR': <div>Authorization Error</div>,
+        'REDIRECT': <Redirect to="/" />,
+        'START': <div></div>
+    }
 
     return (
         <Form className="signin">
@@ -31,14 +36,14 @@ function SignIn(props) {
             <Button variant="primary" onClick={signIn}>
                 SignIn
             </Button>
-            {errorText}
+            {events[props.next]}
         </Form>
     )
 }
 
 function mapStateToProps(state) {
-    const { token, error } = state.auth;
-    return { token, error }
+    const { next } = state.auth;
+    return { next }
 }
 
 export default connect(mapStateToProps)(SignIn);

@@ -1,8 +1,22 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import Button from 'react-bootstrap/Button';
+import { connect } from 'react-redux';
+import { logout } from '../redux/actions/authAction';
 
 function Navigation(props) {
+
+    let SignOut = () => {
+        props.dispatch(logout())
+    }
+
+    let authButtons = props.token === ""
+        ? <div>
+            <Nav.Link variant="primary" href="/SignIn">SignIn</Nav.Link>
+            <Nav.Link variant="primary" href="/SignUp">SignUp</Nav.Link>
+        </div>
+        : <Button variant="light" onClick={SignOut}>SignOut</Button>
 
     return (
         <Navbar bg="light" expand="lg">
@@ -15,11 +29,15 @@ function Navigation(props) {
                 </Nav>
             </Navbar.Collapse>
             <Nav className="mr-sm-2">
-                <Nav.Link variant="primary" href="/SignIn">SignIn</Nav.Link>
-                <Nav.Link variant="primary" href="/SignUp">SignUp</Nav.Link>
+                {authButtons}
             </Nav>
         </Navbar>
     )
 }
 
-export default Navigation;
+function mapStateToProps(state) {
+    const { token } = state.auth;
+    return { token }
+}
+
+export default connect(mapStateToProps)(Navigation);
