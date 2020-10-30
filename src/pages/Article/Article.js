@@ -14,8 +14,8 @@ function Article(props) {
 
     return (
         <div>
-            <div>Статья</div>
             <Title title={props.title} />
+            <div>Author: {props.author}</div>
             <Description description={props.description} />
             <Content content={props.content} />
         </div>
@@ -24,8 +24,8 @@ function Article(props) {
 }
 
 function mapStateToProps(state) {
-    const { title, description, content } = state.article;
-    return { title, description, content };
+    const { title, description, content, author } = state.article;
+    return { title, description, content, author };
 }
 
 export default connect(mapStateToProps)(Article);

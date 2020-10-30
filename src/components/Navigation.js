@@ -12,10 +12,10 @@ function Navigation(props) {
     }
 
     let authButtons = props.token === ""
-        ? <div>
+        ? <>
             <Nav.Link variant="primary" href="/SignIn">SignIn</Nav.Link>
             <Nav.Link variant="primary" href="/SignUp">SignUp</Nav.Link>
-        </div>
+        </>
         : <Button variant="light" onClick={SignOut}>SignOut</Button>
 
     return (
