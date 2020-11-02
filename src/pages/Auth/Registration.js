@@ -1,27 +1,16 @@
 import React from 'react';
-import { auth } from '../../redux/actions/authAction'
-import Button from 'react-bootstrap/Button'
-import { connect } from 'react-redux';
+import { registration } from '../../redux/actions/authAction';
+import AuthForm from './AuthForm';
 
-function Registration(props) {
-
-    const handleClick = () => {
-        props.dispatch(auth());
-    }
-
+function Registration() {
 
     return (
-        <div>
-            <div>{props.auth ? "true" : "false"}</div>
-            <Button onClick={handleClick}>Button</Button>
-        </div>
-    );
-
+        <AuthForm
+            error_message='Nickname exists'
+            button_name='SignUp'
+            action={registration}
+        />
+    )
 }
 
-function mapStateToProps(state) {
-    const { auth } = state.auth;
-    return { auth };
-  }
-  
-export default connect(mapStateToProps)(Registration);
+export default Registration;

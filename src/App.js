@@ -10,6 +10,8 @@ import Articles from './pages/Articles/Articles';
 import Article from './pages/Article/Article';
 import Navigation from './components/Navigation';
 import SignIn from './pages/Auth/SignIn';
+import Registration from './pages/Auth/Registration';
+//import DevTools from './components/DevTools';
 
 class App extends React.Component {
 
@@ -18,6 +20,7 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <Router>
+       {/*   <DevTools store={store} /> */}
           <Navigation />
           <Switch>
             <Route exact path="/" component={Main} />
@@ -25,6 +28,7 @@ class App extends React.Component {
             <Route path="/articles/:idTopic" component={Articles} />
             <Route path="/article/:idArticle" component={Article} />
             <Route path="/SignIn" component={SignIn} />
+            <Route path="/SignUp" component={Registration} />
           </Switch>
         </Router>
       </Provider>
