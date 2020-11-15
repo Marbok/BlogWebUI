@@ -1,31 +1,28 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getArticle } from '../../redux/actions/getArticleAction'
 
 import Title from './Title'
 import Description from './Description'
 import Content from './Content'
 
-function Article(props) {
+export default function Article({ match: { params: { idArticle } } }) {
+
+    const dispatch = useDispatch();
+    const { title, author, description, content } = useSelector(state => state.article);
+
 
     useEffect(() => {
-        props.dispatch(getArticle(props.match.params.idArticle))
-    }, [])
+        dispatch(getArticle(idArticle))
+    }, [dispatch, idArticle])
 
     return (
         <div>
-            <Title title={props.title} />
-            <div>Author: {props.author}</div>
-            <Description description={props.description} />
-            <Content content={props.content} />
+            <Title title={title} />
+            <div>Author: {author}</div>
+            <Description description={description} />
+            <Content content={content} />
         </div>
-    )
+    );
 
 }
-
-function mapStateToProps(state) {
-    const { title, description, content, author } = state.article;
-    return { title, description, content, author };
-}
-
-export default connect(mapStateToProps)(Article);

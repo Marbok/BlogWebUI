@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Redirect } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './SignIn.css';
 
-function AuthForm(props) { // use one component with signIn
+export default function AuthForm({action, error_message, button_name}) {
 
     const [nickname, setNickname] = useState('');
     const [password, setPassword] = useState('');
 
-    let signUp = () => {
-        props.dispatch(props.action(nickname, password));
-    }
+    const dispatch = useDispatch();
+    const next = useSelector(state => state.auth.next);
+
+    let signUp = () => dispatch(action(nickname, password));
+    let signUpCallback = useCallback(signUp, []);
 
     let events = {
-        'ERROR': <div>{props.error_message}</div>,
+        'ERROR': <div>{error_message}</div>,
         'REDIRECT': <Redirect to="/" />,
         'START': <div></div>
     }
@@ -32,17 +34,10 @@ function AuthForm(props) { // use one component with signIn
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" onChange={e => setPassword(e.target.value)} placeholder="Password" />
             </Form.Group>
-            <Button variant="primary" onClick={signUp}>
-                {props.button_name}
+            <Button variant="primary" onClick={signUpCallback}>
+                {button_name}
             </Button>
-            {events[props.next]}
+            {events[next]}
         </Form>
     )
 }
-
-function mapStateToProps(state) {
-    const { next } = state.auth;
-    return { next }
-}
-
-export default connect(mapStateToProps)(AuthForm);

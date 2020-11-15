@@ -1,33 +1,28 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getTopicsRequest } from '../../redux/actions/getTopicsAction';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-function TopicsList(props) {
+export default function TopicsList() {
+    const dispatch = useDispatch();
+    const { topics } = useSelector(state => state.topics);
 
     useEffect(() => {
-        props.dispatch(getTopicsRequest());
-    }, []);
+        dispatch(getTopicsRequest());
+    }, [dispatch]);
 
-    let topics = props.topics
-        .map(({ id, name }) => {
-            const link = `/articles/${id}`;
-            return (
-                <li key={id}>
-                    <Link to={link}>{name}</Link>
-                </li>)
-        })
+    let topicsList = topics.map(({ id, name }) => {
+        const link = `/articles/${id}`;
+        return (
+            <li key={id}>
+                <Link to={link}>{name}</Link>
+            </li>)
+    })
+
 
     return (
         <ul>
-            {topics}
+            {topicsList}
         </ul>
     )
 }
-
-function mapStateToProps(state) {
-    const { topics } = state.topics;
-    return { topics };
-}
-
-export default connect(mapStateToProps)(TopicsList);

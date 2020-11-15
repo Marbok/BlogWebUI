@@ -2,7 +2,7 @@ import React from 'react';
 
 import ArticlesList from './ArticlesList'
 
-function Articles(props) {
+export default function Articles(props) {
 
     return (
         <div>
@@ -12,5 +12,3 @@ function Articles(props) {
     )
 
 }
-
-export default Articles;

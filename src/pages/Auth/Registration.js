@@ -2,7 +2,7 @@ import React from 'react';
 import { registration } from '../../redux/actions/authAction';
 import AuthForm from './AuthForm';
 
-function Registration() {
+export default function Registration() {
 
     return (
         <AuthForm
@@ -12,5 +12,3 @@ function Registration() {
         />
     )
 }
-
-export default Registration;
