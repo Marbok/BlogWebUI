@@ -14,10 +14,10 @@ export default function AuthForm({action, error_message, button_name}) {
     const dispatch = useDispatch();
     const next = useSelector(state => state.auth.next);
 
-    let signUp = () => dispatch(action(nickname, password));
-    let signUpCallback = useCallback(signUp, []);
+    const signUp = () => dispatch(action(nickname, password));
+    const signUpCallback = useCallback(signUp, []);
 
-    let events = {
+    const events = {
         'ERROR': <div>{error_message}</div>,
         'REDIRECT': <Redirect to="/" />,
         'START': <div></div>
