@@ -15,7 +15,7 @@ export default function NewArticleForm() {
 
     const topicsOptions = topics.map(({ id, name }) => {
         return (
-            <option value={id}>{name}</option>
+            <option key={id} value={id}>{name}</option>
         )
     })
 
