@@ -9,16 +9,22 @@ import { logout } from '../redux/actions/authAction';
 export default function Navigation() {
 
     const dispatch = useDispatch();
-    const token = useSelector(state => state.token);
+    const token = useSelector(state => state.auth.token);
 
     const signOut = useCallback(() => dispatch(logout()), [dispatch]);
 
     const authButtons = token === ""
-        ? <>
-            <Link className="nav-link" to="/SignIn">SignIn</Link>
-            <Link className="nav-link" to="/SignUp">SignUp</Link>
-        </>
-        : <Button variant="light" onClick={signOut}>SignOut</Button>
+    ? <>
+        <Link className="nav-link" to="/SignIn">SignIn</Link>
+        <Link className="nav-link" to="/SignUp">SignUp</Link>
+    </>
+    : <Button variant="light" onClick={signOut}>SignOut</Button>
+
+    const createArticle = token === ""
+        ? <></>
+        : <Nav className="mr-auto">
+            <Link className="nav-link" to="/createArticle">Create Article</Link>
+        </Nav>
 
     return (
         <Navbar bg="light" expand="lg">
@@ -27,14 +33,12 @@ export default function Navigation() {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <Link className="nav-link" to="/topics">Topics</Link>
+                    {createArticle}
                 </Nav>
-                <Nav className="mr-auto">
-                    <Link className="nav-link" to="/createArticle">Create Article</Link> {/* todo only for authtorize users */}
+                <Nav >
+                    {authButtons}
                 </Nav>
             </Navbar.Collapse>
-            <Nav className="mr-sm-2">
-                {authButtons}
-            </Nav>
         </Navbar>
     );
 }
