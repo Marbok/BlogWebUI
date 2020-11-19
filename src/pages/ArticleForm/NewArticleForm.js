@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getTopicsRequest } from 'redux/actions/getTopicsAction';
-import { saveArticle, createArticle } from 'redux/actions/saveArticleAction';
+import { useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
+import getTopics from 'api/GetTopics';
+import { saveArticleUrl } from 'constants/URLs';
+import { START, REDIRECT } from 'constants/Events';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -14,30 +15,46 @@ export default function NewArticleForm() {
     const [topic, setTopic] = useState(0);
     const [content, setContent] = useState('');
 
+    const [topics, setTopics] = useState([]);
+    const [articleId, setArticleId] = useState(0);
+    const [next, setNext] = useState(START);
+
     const history = useHistory();
-    const dispatch = useDispatch();
-    const { topics } = useSelector(state => state.topics);
-    const { articleId, next } = useSelector(state => state.saveArticle)
+    const { token } = useSelector(state => state.auth);
 
     useEffect(() => {
-        dispatch(createArticle());
-        dispatch(getTopicsRequest());
-    }, [dispatch]);
-
-    useEffect(() => {
-        if (topics !== undefined && topics.length !== 0) {
-            setTopic(topics.find(() => true).id);
-        };
-    }, [topics]);
+        const t = getTopics();
+        console.log(t);
+            t.then(json => {
+                setTopics(json);
+                setTopic(json.find(() => true).id);
+            });
+    }, []);
 
     const cancel = () => history.goBack();
     const save = () => {
-        dispatch(saveArticle({
+        const article = {
             title: title,
             description: description,
             topicId: topic,
             content: content
-        }))
+        };
+
+        const params = {
+            method: "POST",
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(article)
+        }
+        fetch(saveArticleUrl, params)
+            .then(res => res.json())
+            .then(json => {
+                setArticleId(json.articleId);
+                setNext(REDIRECT);
+            });
+        //   .catch(res => dispatch(saveError()));
     }
 
     const topicsOptions = topics.map(({ id, name }) => {
