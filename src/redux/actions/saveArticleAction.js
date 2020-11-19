@@ -1,14 +1,19 @@
 import { saveArticleUrl } from '../../utils/Constant'
 
+export const CREATE_ARTICLE = 'CREATE_ARTICLE';
 export const SAVE_ARTICLE = 'SAVE_ARTICLE';
 export const ERROR_ARTICLE = 'ERROR_ARTICLE';
 
-function saveFinish() {
-    return { type: SAVE_ARTICLE }
+function saveFinish(articleId) {
+    return { type: SAVE_ARTICLE, articleId }
 }
 
 function saveError() {
     return { type: ERROR_ARTICLE }
+}
+
+export function createArticle() {
+    return { type: CREATE_ARTICLE }
 }
 
 export function saveArticle(article) {
@@ -23,7 +28,8 @@ export function saveArticle(article) {
             body: JSON.stringify(article)
         }
         fetch(saveArticleUrl, params)
-            .then(res => dispatch(saveFinish()))
+            .then(res => res.json())
+            .then(json => dispatch(saveFinish(json.articleId)))
             .catch(res => dispatch(saveError()));
     }
 }

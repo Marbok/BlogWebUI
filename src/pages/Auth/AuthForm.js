@@ -19,7 +19,7 @@ export default function AuthForm({ action, error_message, button_name }) {
     const events = {
         'ERROR': <div>{error_message}</div>,
         'REDIRECT': <Redirect to="/" />,
-        'START': <div></div>
+        'START': <></>
     }
 
     return (

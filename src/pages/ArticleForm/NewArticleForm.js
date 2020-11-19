@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTopicsRequest } from '../../redux/actions/getTopicsAction';
-import { saveArticle } from '../../redux/actions/saveArticleAction';
-import { useHistory } from 'react-router-dom';
+import { getTopicsRequest } from 'redux/actions/getTopicsAction';
+import { saveArticle, createArticle } from 'redux/actions/saveArticleAction';
+import { Redirect, useHistory } from 'react-router-dom';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -17,8 +17,10 @@ export default function NewArticleForm() {
     const history = useHistory();
     const dispatch = useDispatch();
     const { topics } = useSelector(state => state.topics);
+    const { articleId, next } = useSelector(state => state.saveArticle)
 
     useEffect(() => {
+        dispatch(createArticle());
         dispatch(getTopicsRequest());
     }, [dispatch]);
 
@@ -44,6 +46,11 @@ export default function NewArticleForm() {
         )
     })
 
+    const events = {
+        START: <></>,
+        REDIRECT: <Redirect to={`/article/${articleId}`} />
+    }
+
     return (
         <Form>
             <Button variant="primary" onClick={save}>Save</Button>{' '}
@@ -66,6 +73,7 @@ export default function NewArticleForm() {
                 <Form.Label>Article body:</Form.Label>
                 <Form.Control as="textarea" rows={50} onChange={e => setContent(e.target.value)} />
             </Form.Group>
+            {events[next]}
         </Form>
     )
 }
