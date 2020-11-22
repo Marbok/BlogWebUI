@@ -1,14 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-import ArticlesList from './ArticlesList'
+export default function Articles({ articles }) {
 
-export default function Articles(props) {
+    let articlesList = articles.map(({ id, title }) => {
+        const link = `/article/${id}`;
+        return (
+            <li key={id}>
+                <Link to={link}>{title}</Link>
+            </li>)
+    })
 
     return (
-        <div>
-            <div>Список статей</div>
-            <ArticlesList idTopic={props.match.params.idTopic} />
-        </div>
+        <ul>
+            {articlesList}
+        </ul>
     )
-
 }

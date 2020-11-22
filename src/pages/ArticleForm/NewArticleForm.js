@@ -21,7 +21,6 @@ export default function NewArticleForm() {
         });
     }, []);
 
-    const cancel = () => history.goBack();
     const save = (article) => {
         const params = {
             method: "POST",
@@ -34,7 +33,6 @@ export default function NewArticleForm() {
         fetch(saveArticleUrl, params)
             .then(res => res.json())
             .then(json => { history.push(`/article/${json.articleId}`) });
-        //   .catch(res => dispatch(saveError()));
     }
 
     return (
@@ -42,7 +40,6 @@ export default function NewArticleForm() {
             topics={topics}
             topicId={topic}
             save={save}
-            cancel={cancel}
         />
     )
 }

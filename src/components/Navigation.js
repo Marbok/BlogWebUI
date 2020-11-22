@@ -1,30 +1,33 @@
 import React, { useCallback } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../redux/actions/authAction';
+import { logout } from 'redux/actions/authAction';
+
+import Button from 'react-bootstrap/Button';
 
 export default function Navigation() {
 
     const dispatch = useDispatch();
-    const token = useSelector(state => state.auth.token);
+    const { token } = useSelector(state => state.auth);
 
     const signOut = useCallback(() => dispatch(logout()), [dispatch]);
 
     const authButtons = token === ""
-    ? <>
-        <Link className="nav-link" to="/SignIn">SignIn</Link>
-        <Link className="nav-link" to="/SignUp">SignUp</Link>
-    </>
-    : <Button variant="light" onClick={signOut}>SignOut</Button>
+        ? <>
+            <Link className="nav-link" to="/SignIn">SignIn</Link>
+            <Link className="nav-link" to="/SignUp">SignUp</Link>
+        </>
+        : <Button className="nav-link" onClick={signOut}>SignOut</Button>
 
-    const createArticle = token === ""
+    const buttonsForAuthUser = token === ""
         ? <></>
-        : <Nav className="mr-auto">
+        : <>
             <Link className="nav-link" to="/createArticle">Create Article</Link>
-        </Nav>
+            <Link className="nav-link" to="/myArticles">My Article</Link>
+
+        </>
 
     return (
         <Navbar bg="light" expand="lg">
@@ -33,7 +36,7 @@ export default function Navigation() {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <Link className="nav-link" to="/topics">Topics</Link>
-                    {createArticle}
+                    {buttonsForAuthUser}
                 </Nav>
                 <Nav >
                     {authButtons}

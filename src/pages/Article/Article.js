@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getArticle } from '../../redux/actions/getArticleAction'
+import { getArticle } from 'redux/actions/getArticleAction'
 
 import Title from './Title'
 import Description from './Description'

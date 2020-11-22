@@ -6,8 +6,8 @@ export const LOGOUT = 'LOGOUT';
 export const REGISTRATION = 'REGISTRATION';
 export const TOKEN = 'TOKEN';
 
-function authFinish(result) {
-    return { type: AUTHORIZATION, result }
+function authFinish(nickname, token) {
+    return { type: AUTHORIZATION, nickname, token }
 }
 
 function authError() {
@@ -44,7 +44,7 @@ function sendRequest(url, login, password) {
             body: JSON.stringify(user)
         })
             .then(res => res.json())
-            .then(json => dispatch(authFinish(json.token)))
+            .then(json => dispatch(authFinish(login, json.token)))
             .catch(() => dispatch(authError()));
     }
 }

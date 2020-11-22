@@ -8,7 +8,7 @@ function getArticlesFinish(responce) {
 
 export function getArticles(id) {
     return (dispatch) => {
-        fetch(`${articlesUrl}/${id}`)
+        fetch(`${articlesUrl}?topicId=${id}`)
             .then(responce => responce.json())
             .then(json => dispatch(getArticlesFinish(json)))
     }

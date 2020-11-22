@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export default function ArticleForm({ topics, title = '', topicId, description = '', content = '', save, cancel }) {
+import CancelButton from 'components/CancelButton';
+
+export default function ArticleForm({ topics, title = '', topicId, description = '', content = '', save }) {
 
     const [titleActual, setTitle] = useState(title);
     const [descriptionActual, setDescription] = useState(description);
     const [topic, setTopic] = useState(topicId);
     const [contentActual, setContent] = useState(content);
+
+    useEffect(() => {
+        setTopic(topicId)
+    }, [topicId]);
 
     const topicsOptions = topics.map(({ id, name }) => {
         return (
@@ -29,7 +35,7 @@ export default function ArticleForm({ topics, title = '', topicId, description =
     return (
         <Form>
             <Button variant="primary" onClick={saveArticle}>Save</Button>{' '}
-            <Button variant="primary" onClick={cancel}>Cancel</Button>
+            <CancelButton />
             <Form.Group controlId="title">
                 <Form.Label>Title:</Form.Label>
                 <Form.Control type="text" placeholder="title" onChange={e => setTitle(e.target.value)} />
