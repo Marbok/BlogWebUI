@@ -13,8 +13,11 @@ export default function ArticleForm({ topics, title = '', topicId, description =
     const [contentActual, setContent] = useState(content);
 
     useEffect(() => {
-        setTopic(topicId)
-    }, [topicId]);
+        setTitle(title);
+        setTopic(topicId);
+        setDescription(description);
+        setContent(content);
+    }, [topicId, description, title, content]);
 
     const topicsOptions = topics.map(({ id, name }) => {
         return (
@@ -38,21 +41,21 @@ export default function ArticleForm({ topics, title = '', topicId, description =
             <CancelButton />
             <Form.Group controlId="title">
                 <Form.Label>Title:</Form.Label>
-                <Form.Control type="text" placeholder="title" onChange={e => setTitle(e.target.value)} />
+                <Form.Control type="text" placeholder="title" onChange={e => setTitle(e.target.value)} value={titleActual} />
             </Form.Group>
             <Form.Group controlId="description">
                 <Form.Label>Description:</Form.Label>
-                <Form.Control type="text" placeholder="description" onChange={e => setDescription(e.target.value)} />
+                <Form.Control type="text" placeholder="description" onChange={e => setDescription(e.target.value)} value={descriptionActual} />
             </Form.Group>
             <Form.Group controlId="topic">
                 <Form.Label>Topic:</Form.Label>
-                <Form.Control as="select" onChange={e => setTopic(e.target.value)}>
+                <Form.Control as="select" onChange={e => setTopic(e.target.value)} value={topic}>
                     {topicsOptions}
                 </Form.Control>
             </Form.Group>
             <Form.Group controlId="content">
                 <Form.Label>Article body:</Form.Label>
-                <Form.Control as="textarea" rows={50} onChange={e => setContent(e.target.value)} />
+                <Form.Control as="textarea" rows={50} onChange={e => setContent(e.target.value)} value={contentActual} />
             </Form.Group>
         </Form>
     )

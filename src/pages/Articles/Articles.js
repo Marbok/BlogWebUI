@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Articles({ articles }) {
+const defaultIndexFabric = (id, link, title) => <Link to={link}>{title}</Link>;
+
+export default function Articles({ articles, indexFabric = defaultIndexFabric }) {
 
     let articlesList = articles.map(({ id, title }) => {
         const link = `/article/${id}`;
         return (
             <li key={id}>
-                <Link to={link}>{title}</Link>
+                {indexFabric(id, link, title)}
             </li>)
     })
 

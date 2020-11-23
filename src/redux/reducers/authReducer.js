@@ -1,4 +1,4 @@
-import { AUTHORIZATION, AUTHORIZATION_ERROR, LOGOUT, TOKEN } from '../actions/authAction'
+import { AUTHORIZATION, AUTHORIZATION_ERROR, LOGOUT } from '../actions/authAction';
 
 const initialState = {
     nickname: '',
@@ -22,7 +22,6 @@ export default function (state = initialState, action) {
             };
         case LOGOUT:
             return initialState;
-        case TOKEN:
         default:
             return state;
     }

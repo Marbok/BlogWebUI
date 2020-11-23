@@ -4,7 +4,6 @@ export const AUTHORIZATION = 'AUTHORIZATION';
 export const AUTHORIZATION_ERROR = 'AUTHORIZATION_ERROR';
 export const LOGOUT = 'LOGOUT';
 export const REGISTRATION = 'REGISTRATION';
-export const TOKEN = 'TOKEN';
 
 function authFinish(nickname, token) {
     return { type: AUTHORIZATION, nickname, token }
@@ -12,10 +11,6 @@ function authFinish(nickname, token) {
 
 function authError() {
     return { type: AUTHORIZATION_ERROR }
-}
-
-export function getToken() {
-    return { type: TOKEN }
 }
 
 export function auth(login, password) {

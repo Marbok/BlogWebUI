@@ -25,6 +25,19 @@ class API {
             .then(res => res.json())
     }
 
+    async editArticle(article, articleId) {
+        const params = {
+            method: "PUT",
+            headers: {
+                'Authorization': `Bearer ${this.token()}`,
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(article)
+        }
+        return await fetch(`${articleUrl}/${articleId}`, params)
+            .then(res => res.json())
+    }
+
     async getArticlesByTopicId(id) {
         return await fetch(`${articlesUrl}?topicId=${id}`)
             .then(responce => responce.json());
