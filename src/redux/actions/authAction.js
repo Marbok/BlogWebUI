@@ -1,4 +1,4 @@
-import { tokenUrl, registrationUrl } from '../../utils/Constant';
+import { tokenUrl, registrationUrl } from 'constants/URLs';
 
 export const AUTHORIZATION = 'AUTHORIZATION';
 export const AUTHORIZATION_ERROR = 'AUTHORIZATION_ERROR';

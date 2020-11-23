@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'redux/actions/authAction';
 
-import Button from 'react-bootstrap/Button';
-
 export default function Navigation() {
 
     const dispatch = useDispatch();
@@ -19,14 +17,13 @@ export default function Navigation() {
             <Link className="nav-link" to="/SignIn">SignIn</Link>
             <Link className="nav-link" to="/SignUp">SignUp</Link>
         </>
-        : <Button className="nav-link" onClick={signOut}>SignOut</Button>
+        : <Link className="nav-link" onClick={signOut} to="#">SignOut</Link>
 
     const buttonsForAuthUser = token === ""
         ? <></>
         : <>
             <Link className="nav-link" to="/createArticle">Create Article</Link>
             <Link className="nav-link" to="/myArticles">My Article</Link>
-
         </>
 
     return (
