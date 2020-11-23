@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import getTopics from 'api/GetTopics';
-import { saveArticleUrl } from 'constants/URLs';
+import API from 'api/API';
 
 import ArtcleForm from './ArticleForm';
 
@@ -12,26 +10,17 @@ export default function NewArticleForm() {
     const [topics, setTopics] = useState([]);
 
     const history = useHistory();
-    const { token } = useSelector(state => state.auth);
 
     useEffect(() => {
-        getTopics().then(json => {
-            setTopics(json);
-            setTopic(json.find(() => true).id);
-        });
+        API.getTopics()
+            .then(json => {
+                setTopics(json);
+                setTopic(json.find(() => true).id);
+            });
     }, []);
 
     const save = (article) => {
-        const params = {
-            method: "POST",
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(article)
-        }
-        fetch(saveArticleUrl, params)
-            .then(res => res.json())
+        API.saveArticle(article)
             .then(json => { history.push(`/article/${json.articleId}`) });
     }
 

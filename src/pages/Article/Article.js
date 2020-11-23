@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getArticle } from 'redux/actions/getArticleAction'
+import React, { useEffect, useState } from 'react';
+import API from 'api/API';
 
 import Title from './Title'
 import Description from './Description'
@@ -8,13 +7,20 @@ import Content from './Content'
 
 export default function Article({ match: { params: { idArticle } } }) {
 
-    const dispatch = useDispatch();
-    const { title, author, description, content } = useSelector(state => state.article);
-
+    const [title, setTitle] = useState("");
+    const [author, setAuthor] = useState("");
+    const [description, setDescription] = useState("");
+    const [content, setContent] = useState("");
 
     useEffect(() => {
-        dispatch(getArticle(idArticle))
-    }, [dispatch, idArticle])
+        API.getArticle(idArticle)
+            .then(article => {
+                setTitle(article.title);
+                setAuthor(article.author);
+                setDescription(article.description);
+                setContent(article.content);
+            })
+    }, [idArticle])
 
     return (
         <div>

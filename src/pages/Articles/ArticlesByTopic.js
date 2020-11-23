@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getArticlesByTopicId } from 'api/GetArticles';
+import API from 'api/API';
 import Articles from './Articles';
 
 export default function ArticlesByTopic({ match: { params: { idTopic } } }) {
@@ -7,7 +7,7 @@ export default function ArticlesByTopic({ match: { params: { idTopic } } }) {
     const [articles, setArticles] = useState([]);
 
     useEffect(() => {
-        getArticlesByTopicId(idTopic)
+        API.getArticlesByTopicId(idTopic)
             .then(json => setArticles(json));
     }, [idTopic]);
 
