@@ -48,6 +48,11 @@ class API {
             .then(responce => responce.json());
     }
 
+    async getArticles() {
+        return await fetch(articlesUrl)
+            .then(responce => responce.json());
+    }
+
     async getArticle(id) {
         return await fetch(`${articleUrl}/${id}`)
             .then(result => result.json());

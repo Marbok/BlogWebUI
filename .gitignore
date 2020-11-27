@@ -2,3 +2,4 @@ node_modules
 .fake
 .ionide
 build
+npm-debug.log

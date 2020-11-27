@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Topics from 'pages/Topics/Topics';
-import Main from 'pages/Main';
+import Main from 'pages/Main/Main';
 import ArticlesByTopic from 'pages/Articles/ArticlesByTopic';
 import Article from 'pages/Article/Article';
 import SignIn from 'pages/Auth/SignIn';
